@@ -119,7 +119,9 @@ export default {
                 this.height = this.leftHeight ? window.innerHeight - this.leftHeight : 500
 
                 if (this.showCheckbox) {
-                    this.selected = [...this.initSelected]
+                    if (this.initSelected) {
+                        this.selected = [...this.initSelected]
+                    }
                     this.originPoint.x = this.serialWidth + this.checkboxWidth
                     this.bodyWidth += this.checkboxWidth
                 } else {
@@ -139,7 +141,6 @@ export default {
                     this.fillWidth = (this.width - this.bodyWidth - this.scrollerWidth) / columnCount
                     this.bodyWidth = this.width - this.scrollerWidth
                 }
-
                 this.setBodyHeight(this.allRows, this.originPoint)
                 this.setFixedWidth(this.allColumns, this.fillWidth)
                 this.setMaxpoint(this.width, this.height, this.fixedWidth, this.scrollerWidth, this.fillWidth)

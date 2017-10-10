@@ -146,7 +146,8 @@ export default {
         this.$nextTick(function() { //eslint-disable-line
             if (this.data.length > 0) {
                 this.initCanvas()
-                this.painted(this.initDisplayItems())
+                // this.painted(this.initDisplayItems())
+                this.initSize()
                 this.initEvent()
             }
         })
