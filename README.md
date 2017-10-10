@@ -2,7 +2,9 @@
 
 > a vue component
 
-### 目前测试阶段，暂不发布npm仓库，定制型较弱，需要日后完善，有需要的朋友，可类似simple使用，联系：zhao
+![vue-grid-canvas][doge]
+
+### 目前测试阶段，暂不发布npm仓库，定制性较弱，需要日后完善，有需要的朋友，可璨开simple使用
 
 ### 一个类似excel的表格组件，说明：
 * 1，通过canvas实现，能处理万级数据
@@ -38,3 +40,5 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+[doge]:data:image/png;base64,iVBORw0......
