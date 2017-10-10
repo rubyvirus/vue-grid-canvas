@@ -2,11 +2,11 @@
 
 > a vue component
 
-![vue-grid-canvas][doge]
+![vue-grid-canvas][https://github.com/Harveyzhao/vue-grid-canvas/blob/master/WechatIMG132.jpeg?raw=true]
 
 ### 目前测试阶段，暂不发布npm仓库，定制性较弱，需要日后完善，有需要的朋友，可璨开simple使用
 
-### 一个类似excel的表格组件，说明：
+#### 一个类似excel的表格组件，说明：
 * 1，通过canvas实现，能处理万级数据
 * 2，类似excel，选中单元格并实时编辑
 * 3，复制黏贴，支持批量
@@ -19,7 +19,7 @@
 * 9，支持文本的重新计算渲染（通过计算的单元格不支持实时编辑）
 。。。
 
-以后计划：
+#### 以后计划：
 * 1，由于使用canvas不支持浏览器的检索功能，以后加上表格的搜索功能
 * 2，行列拖拽
 
@@ -40,5 +40,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-[doge]:data:image/png;base64,iVBORw0......
