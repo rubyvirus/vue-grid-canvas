@@ -73,6 +73,8 @@ export default {
     },
     methods: {
         fullScreen() {
+            // TODO fullscrean
+
             // this.$refs.canvas.style.position = 'fixed'
             // this.$refs.canvas.style.top = 0
             // this.$refs.canvas.style.left = 0
