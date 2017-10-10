@@ -559,6 +559,8 @@ export default {
         top: 31px;
         left: 71px;
         padding: 0 8px;
+        font-size: 12px;
+        color: #495060;
         .column-set__title {
             height: 30px;
             line-height: 30px;
@@ -567,8 +569,13 @@ export default {
         .column-set__content {
             overflow: auto;
             padding: 5px;
+            color: #495060;
             ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
                 li {
+                    font-size: 12px;
                     height: 30px;
                     line-height: 30px;
                 }
