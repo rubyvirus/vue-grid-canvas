@@ -18,7 +18,7 @@ export default {
             focusColor: '#4285f4',
             selectColor: '#6bc9ff',
             selectAreaColor: 'rgba(160, 195, 255, 0.2)',
-            selectRowColor: '#fff3dc',
+            selectRowColor: '#f6f6f6',
             dotColor: '#74d337',
             oncheck,
             offcheck,

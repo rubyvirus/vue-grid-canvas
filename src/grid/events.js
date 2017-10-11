@@ -27,7 +27,6 @@ export default {
             window.removeEventListener('mousemove', throttle(16, this.handleMousemove), true)
             window.removeEventListener('mouseup', this.handleMouseup, false)
             window.removeEventListener('resize', this.handleResize, false)
-            window.removeEventListener('mousedown', this.handleWindowMouseDown, false)
             window.removeEventListener(this.isFirefox ? 'DOMMouseScroll' : 'mousewheel', this.handleWheel)
             window.removeEventListener('keydown', this.handleKeydown, false)
             window.removeEventListener('keyup', this.handleKeyup, false)
@@ -40,7 +39,6 @@ export default {
             this.$refs.canvas.addEventListener('dblclick', this.handleDoubleClick, false)
             this.$refs.canvas.addEventListener('click', this.handleClick, false)
             window.addEventListener('resize', this.handleResize, false)
-            window.addEventListener('mousedown', this.handleWindowMouseDown, false)
             window.addEventListener(this.isFirefox ? 'DOMMouseScroll' : 'mousewheel', this.handleWheel)
             window.addEventListener('keydown', this.handleKeydown, false)
             window.addEventListener('keyup', this.handleKeyup, false)
@@ -54,39 +52,6 @@ export default {
             this.save()
             this.hideInput()
             this.initSize()
-        },
-        handleWindowMouseDown(e) {
-            let needRepaint = false
-            if (!e.target.classList.contains('input-content')) {
-                if (e.target.tagName !== 'CANVAS') {
-                    if (this.isEditing) {
-                        this.save()
-                        this.hideInput()
-                        needRepaint = true
-                    }
-                    if (this.isFocus) {
-                        this.isFocus = false
-                        this.focusCell = null
-                        needRepaint = true
-                    }
-                    if (this.isSelect) {
-                        this.selectArea = null
-                        this.isSelect = false
-                        needRepaint = true
-                    }
-                    if (this.showColumnSet) {
-                        setTimeout(() => {
-                            if (e.path.indexOf(this.$refs.columnSet) === -1) {
-                                this.showColumnSet = false
-                                this.initSize()
-                            }
-                        }, 0)
-                    }
-                    if (needRepaint) {
-                        this.rePainted()
-                    }
-                }
-            }
         },
         handleColumnSet() {
             this.showColumnSet = false
@@ -235,9 +200,43 @@ export default {
                     }
                 }
             }
+            if (this.verticalBar.move) {
+                const height = this.maxPoint.y - this.verticalBar.size
+                const moveHeight = this.verticalBar.y + (evt.screenY - this.verticalBar.cursorY)
+                if (moveHeight > 0 && moveHeight < height) {
+                    this.verticalBar.y += evt.screenY - this.verticalBar.cursorY
+                } else if (moveHeight <= 0) {
+                    this.verticalBar.y = 0
+                } else {
+                    this.verticalBar.y = height
+                }
+                this.verticalBar.cursorY = evt.screenY
+                this.offset.y = -this.verticalBar.y / this.verticalBar.k
+                requestAnimationFrame(this.rePainted)
+            }
+            if (this.horizontalBar.move) {
+                let width = 0
+                if (this.fillWidth > 0) {
+                    width = this.maxPoint.x - this.horizontalBar.size
+                } else {
+                    width = (this.maxPoint.x + this.fixedWidth) - this.horizontalBar.size
+                }
+                const moveWidth = this.horizontalBar.x + (evt.screenX - this.horizontalBar.cursorX)
+                if (moveWidth > 0 && moveWidth < width) {
+                    this.horizontalBar.x += evt.screenX - this.horizontalBar.cursorX
+                } else if (moveWidth <= 0) {
+                    this.horizontalBar.x = 0
+                } else {
+                    this.horizontalBar.x = width
+                }
+                this.horizontalBar.cursorX = evt.screenX
+                this.offset.x = -this.horizontalBar.x / this.horizontalBar.k
+                requestAnimationFrame(this.rePainted)
+            }
         },
         handleMousedown(evt) {
             this.save()
+            let needRepaint = false
             if (evt.target.tagName === 'CANVAS') {
                 setTimeout(() => {
                     this.isDown = true
@@ -291,10 +290,41 @@ export default {
                         this.rePainted()
                     }
                 }, 0)
+            } else if (!evt.target.classList.contains('input-content')) {
+                if (evt.target.tagName !== 'CANVAS') {
+                    if (this.isEditing) {
+                        this.save()
+                        this.hideInput()
+                        needRepaint = true
+                    }
+                    if (this.isFocus) {
+                        this.isFocus = false
+                        this.focusCell = null
+                        needRepaint = true
+                    }
+                    if (this.isSelect) {
+                        this.selectArea = null
+                        this.isSelect = false
+                        needRepaint = true
+                    }
+                    if (this.showColumnSet) {
+                        setTimeout(() => {
+                            if (evt.path.indexOf(this.$refs.columnSet) === -1) {
+                                this.showColumnSet = false
+                                this.initSize()
+                            }
+                        }, 0)
+                    }
+                    if (needRepaint) {
+                        this.rePainted()
+                    }
+                }
             }
         },
         handleMouseup() {
             this.isDown = false
+            this.horizontalBar.move = false
+            this.verticalBar.move = false
         },
         handleKeyup(e) {
             if (e.keyCode === 16) {

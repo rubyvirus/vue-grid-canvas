@@ -44,7 +44,7 @@ export default {
         }
     },
     created() {
-        for (let i = 0; i < 1000; i += 1) {
+        for (let i = 0; i < 10000; i += 1) {
             this.data.push({
                 brandName: `博世${i}`,
                 goodsName: `电钻${i}`,

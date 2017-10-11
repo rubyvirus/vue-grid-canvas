@@ -24,45 +24,45 @@ export default {
         })
     },
     mounted() {
-        document.addEventListener('mouseup', () => {
-            this.horizontalBar.move = false
-            this.verticalBar.move = false
-        })
-        document.addEventListener('mousemove', (e) => {
-            if (this.verticalBar.move) {
-                const height = this.maxPoint.y - this.verticalBar.size
-                const moveHeight = this.verticalBar.y + (e.screenY - this.verticalBar.cursorY)
-                if (moveHeight > 0 && moveHeight < height) {
-                    this.verticalBar.y += e.screenY - this.verticalBar.cursorY
-                } else if (moveHeight <= 0) {
-                    this.verticalBar.y = 0
-                } else {
-                    this.verticalBar.y = height
-                }
-                this.verticalBar.cursorY = e.screenY
-                this.offset.y = -this.verticalBar.y / this.verticalBar.k
-                requestAnimationFrame(this.rePainted)
-            }
-            if (this.horizontalBar.move) {
-                let width = 0
-                if (this.fillWidth > 0) {
-                    width = this.maxPoint.x - this.horizontalBar.size
-                } else {
-                    width = (this.maxPoint.x + this.fixedWidth) - this.horizontalBar.size
-                }
-                const moveWidth = this.horizontalBar.x + (e.screenX - this.horizontalBar.cursorX)
-                if (moveWidth > 0 && moveWidth < width) {
-                    this.horizontalBar.x += e.screenX - this.horizontalBar.cursorX
-                } else if (moveWidth <= 0) {
-                    this.horizontalBar.x = 0
-                } else {
-                    this.horizontalBar.x = width
-                }
-                this.horizontalBar.cursorX = e.screenX
-                this.offset.x = -this.horizontalBar.x / this.horizontalBar.k
-                requestAnimationFrame(this.rePainted)
-            }
-        })
+        // document.addEventListener('mouseup', () => {
+        //     this.horizontalBar.move = false
+        //     this.verticalBar.move = false
+        // })
+        // document.addEventListener('mousemove', (e) => {
+        //     if (this.verticalBar.move) {
+        //         const height = this.maxPoint.y - this.verticalBar.size
+        //         const moveHeight = this.verticalBar.y + (e.screenY - this.verticalBar.cursorY)
+        //         if (moveHeight > 0 && moveHeight < height) {
+        //             this.verticalBar.y += e.screenY - this.verticalBar.cursorY
+        //         } else if (moveHeight <= 0) {
+        //             this.verticalBar.y = 0
+        //         } else {
+        //             this.verticalBar.y = height
+        //         }
+        //         this.verticalBar.cursorY = e.screenY
+        //         this.offset.y = -this.verticalBar.y / this.verticalBar.k
+        //         requestAnimationFrame(this.rePainted)
+        //     }
+        //     if (this.horizontalBar.move) {
+        //         let width = 0
+        //         if (this.fillWidth > 0) {
+        //             width = this.maxPoint.x - this.horizontalBar.size
+        //         } else {
+        //             width = (this.maxPoint.x + this.fixedWidth) - this.horizontalBar.size
+        //         }
+        //         const moveWidth = this.horizontalBar.x + (e.screenX - this.horizontalBar.cursorX)
+        //         if (moveWidth > 0 && moveWidth < width) {
+        //             this.horizontalBar.x += e.screenX - this.horizontalBar.cursorX
+        //         } else if (moveWidth <= 0) {
+        //             this.horizontalBar.x = 0
+        //         } else {
+        //             this.horizontalBar.x = width
+        //         }
+        //         this.horizontalBar.cursorX = e.screenX
+        //         this.offset.x = -this.horizontalBar.x / this.horizontalBar.k
+        //         requestAnimationFrame(this.rePainted)
+        //     }
+        // })
     },
     methods: {
         scroll(e, type) {
